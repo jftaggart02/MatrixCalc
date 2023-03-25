@@ -32,18 +32,29 @@ int main()
 {
 
 	int row = 0, col = 0;
-    const int matrix_row = 2;
-    const int matrix_col = 4;
+    const int rows = 3;
+    const int cols = 5;
     int pvt_row = 0;
     int temp1 = 0, temp2 = 0;
-    int i;
+    int i, j;
 
-    int a[3][5] = {{0, 2, 4, 1, 6}, 
-                   {2, 3, 5, 7, 9}, 
-                   {1, 2, 6, 3, 6}};
+    int a[3][5] = {{0, 0, 0, 5, 4}, 
+                   {0, 1, 0, 0, 9}, 
+                   {0, 0, 1, 8, 0}};
 
-    // while (pvt_row <= matrix_row)
-    // {
+    printf("Array contents:\n");
+
+    for (i = 0; i < rows; i++) {
+        printf(" | ");
+        for (j = 0; j < cols; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("|");
+        printf("\n");
+    }
+
+    while (pvt_row < rows)
+    {
         // 1. FIND FIRST NONZERO ENTRY
         while (1)
         {
@@ -51,11 +62,11 @@ int main()
             {
                 break;
             }
-            else if (a[row][col] == 0 && row < matrix_row)
+            else if (a[row][col] == 0 && row < (rows - 1))
             {
                 row++;
             }
-            else if (a[row][col] == 0 && row == matrix_row)
+            else if (a[row][col] == 0 && row == (rows - 1))
             {
                 goto end_of_loop;
             }
@@ -65,7 +76,7 @@ int main()
         if (row > pvt_row)
         {
             // Switches row with pivot_row
-            for (i = 0; i <= matrix_col; i++)
+            for (i = 0; i < cols; i++)
             {
                 temp1 = a[pvt_row][i];
                 a[pvt_row][i] = a[row][i];
@@ -74,10 +85,33 @@ int main()
         }
         
         pvt_row++;
+        row = pvt_row;
         end_of_loop:
         col++;
-    // }
 
+        // print array contents:
+        printf("Array contents:\n");
+
+        for (i = 0; i < rows; i++) {
+            printf(" | ");
+            for (j = 0; j < cols; j++) {
+                printf("%d ", a[i][j]);
+            }
+            printf("|");
+            printf("\n");
+        }
+
+        // wait for enter key
+        getchar();
+
+        if (row == pvt_row)
+        {
+            break;
+        }
+
+    }
+
+    
 
 	return 0;
 // END
